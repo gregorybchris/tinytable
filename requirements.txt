@@ -1,2 +1,4 @@
-colorama
-pandas
+colorama>=0.4.3
+pandas>=0.25.3
+tables>=3.6.1
+pyarrow>=0.15.1

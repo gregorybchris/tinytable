@@ -2,8 +2,8 @@ from abc import ABC, abstractmethod
 
 
 class Loader(ABC):
-    @abstractmethod
     @staticmethod
+    @abstractmethod
     def load(filepath):
         """
         Load a data object from a file.
@@ -12,8 +12,8 @@ class Loader(ABC):
         """
         raise NotImplementedError()
 
-    @abstractmethod
     @staticmethod
+    @abstractmethod
     def dump(o, filepath):
         """
         Dump a data object to a file.
