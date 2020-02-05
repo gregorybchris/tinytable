@@ -4,7 +4,7 @@ Empirical tool to find the best file format for caching a particular dataset.
 
 ## Installation
 
-Install the current PyPI release:
+Install the [current PyPI release](https://pypi.org/project/tinytable/):
 
 ```bash
 pip install tinytable
