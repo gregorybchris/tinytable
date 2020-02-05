@@ -52,7 +52,9 @@ def run(dataset_path, experiments_dir, experiment_name,
     print(f"Running experiment: {experiment_name}")
     serializer = Serializer(DEFAULT_LOADER_MAP)
 
-    results_df = serializer.serialize(dataset_path, n_trials=trials,
+    # TODO: Load many types of input files
+    dataset_df = pd.read_csv(dataset_path)
+    results_df = serializer.serialize(dataset_df, n_trials=trials,
                                       sample_fraction=sample_fraction)
 
     print(results_df)

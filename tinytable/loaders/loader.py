@@ -10,7 +10,7 @@ class Loader(ABC):
 
         :param filepath: Input filepath.
         """
-        raise NotImplementedError()
+        raise NotImplementedError
 
     @staticmethod
     @abstractmethod
@@ -21,4 +21,4 @@ class Loader(ABC):
         :param o: Data object.
         :param filepath: Output filepath.
         """
-        raise NotImplementedError()
+        raise NotImplementedError

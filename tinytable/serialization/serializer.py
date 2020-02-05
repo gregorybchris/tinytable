@@ -14,19 +14,14 @@ class Serializer:
     def register_loader(self, name, loader_class):
         self._loaders[name] = loader_class
 
-    def serialize(self, dataset_path, n_trials=1, sample_fraction=None):
-        # TODO: Load many types of input files
-        df = pd.read_csv(dataset_path)
-        return self._run_serializations(df, n_trials, sample_fraction)
-
-    def _run_serializations(self, df, n_trials, sample_fraction, show_result=False):
+    def serialize(self, df, n_trials=1, sample_fraction=None, show_result=False):
         if sample_fraction is not None:
             df = df.sample(frac=sample_fraction)
 
         results = []
         for trial in range(n_trials):
             for loader_name, loader_class in self._loaders.items():
-                print(f"Benchmarking {loader_name}...")
+                print(f"Serializing {loader_name}...")
                 size, write, load = self._serialize_dataset(df, loader_class)
                 metric_map = {
                     METRIC_FILE_SIZE: size,
