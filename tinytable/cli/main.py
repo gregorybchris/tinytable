@@ -61,6 +61,8 @@ def run(dataset_path, experiments_dir, experiment_name,
         os.makedirs(experiment_dir)
         results_filepath = os.path.join(experiment_dir, RESULTS_FILENAME)
         results_df.to_csv(results_filepath)
+        plot(experiments_dir, experiment_name)
+        print(f"Experiment created at {os.path.abspath(experiment_dir)}")
 
 
 def create_experiment_name(experiment_name, dataset_filepath):
