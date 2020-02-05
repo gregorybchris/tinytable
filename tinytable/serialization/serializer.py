@@ -8,23 +8,18 @@ from tinytable.serialization.experiment_constants import *
 
 
 class Serializer:
-    def __init__(self, experiments_dir):
-        self._experiments_dir = experiments_dir
-        self._loaders = dict()
+    def __init__(self, loaders=dict()):
+        self._loaders = loaders
 
     def register_loader(self, name, loader_class):
         self._loaders[name] = loader_class
 
-    def register_loaders(self, loader_map):
-        for loader_name, loader_class in loader_map.items():
-            self._loaders[loader_name] = loader_class
-
-    def serialize(self, dataset_path, experiment_name, n_trials=1, sample_fraction=None):
+    def serialize(self, dataset_path, n_trials=1, sample_fraction=None):
         # TODO: Load many types of input files
         df = pd.read_csv(dataset_path)
         return self._run_serializations(df, n_trials, sample_fraction)
 
-    def _run_serializations(self, df, n_trials, sample_fraction):
+    def _run_serializations(self, df, n_trials, sample_fraction, show_result=False):
         if sample_fraction is not None:
             df = df.sample(frac=sample_fraction)
 
@@ -41,9 +36,9 @@ class Serializer:
                 for metric, score in metric_map.items():
                     result = {COL_TRIAL: trial, COL_FILE_FORMAT: loader_name,
                               COL_METRIC: metric, COL_SCORE: score}
-                    print("\tResult: ", result)
+                    if show_result:
+                        print(f"\tResult: {result}")
                     results.append(result)
-                print()
         return pd.DataFrame(results)
 
     def _serialize_dataset(self, df, loader_class):
